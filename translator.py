@@ -1,5 +1,5 @@
 import re
-from parser_roman import parseRomanString
+from helpers.parser_roman import parseRomanString
 
 symbolRegex = "^([\w]+) is ([A-Z]{1,2})$"
 metalRegex = "^([a-zA-z ]+)\ ([I|i]ron|[S|s]ilver|[G|g]old) is ([\d]+) [C|c]redits"
@@ -72,3 +72,8 @@ class Translator():
         for symbol in query.split(" "):
             romanValue += symbols.get(symbol)
         return romanValue
+
+    def setSymbol(self, symbol):
+        self.symbols[symbol[symbolUnitEnum['intergalaticUnit']]] = symbol[symbolUnitEnum['romanNum']]
+    def getResults(self):
+        return self.results
