@@ -10,22 +10,43 @@ romanDict = {
   'I': 1
 }
 
-def getValue(romanValue):
+def getValueFromRomanNum(romanValue):
+    """
+    Get decimal value from a roman value and handle error
+    Input: Roman Value (i.e: I, V, X...)
+    Output: Decimal value of roman value
+    """
     value = romanDict.get(romanValue)
     if value:
         return value
     print("input string contained invalid numeral: %s",romanValue )
     exit()
 
-def parse(romanString):
-    sum = 0
-    for index in range(len(romanString) - 1):
-        currentValue = getValue(romanString[index])
-        nextValue = getValue(romanString[index + 1])
+def parseRomanString(romanValue):
+    """
+    Get total value from roman string
+    Input: Roman String (i.e: LIV)
+    Output: Value of the roman string
+    """
+    total = 0
+    for index in range(len(romanValue) - 1):
+        currentValue = getValueFromRomanNum(romanValue[index])
+        nextValue = getValueFromRomanNum(romanValue[index + 1])
 
         if (currentValue < nextValue):
-            sum -= currentValue
+            total -= currentValue
             continue
-        sum += currentValue
-    sum += getValue(romanString[len(romanString) - 1])
-    return sum
+        total += currentValue
+    total += getValueFromRomanNum(romanValue[len(romanValue) - 1])
+    return total
+
+def toRomanString(queryString, symbols):
+    """
+    Get decimal value from a roman value and handle error
+    Input: Roman Value (I, V, X...)
+    Output: Decimal value of roman value
+    """
+    romanValue = ""
+    for symbol in queryString.split(" "):
+        romanValue += symbols.get(symbol)
+    return romanValue
