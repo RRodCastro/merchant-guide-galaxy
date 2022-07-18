@@ -52,7 +52,9 @@ class Translator():
             for symbol in query:
                 romanString += self.symbols.get(symbol)
             romanValue = parseRomanString(romanString)
-            metalComposition = self.metals[metal]
+            metalComposition = self.metals.get(metal)
+            if not metalComposition:
+                return ['error', 'I have no idea what you are talking about']
             transactionAmount = (
                 romanValue * metalComposition['credits'] / metalComposition['amount']) if metalComposition['amount'] > 0 else 0
             return [' '.join(query) + ' ' + (metal.capitalize()), int(transactionAmount)]
