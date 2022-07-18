@@ -9,7 +9,7 @@ for line in lines:
     translator.parseCommand(query)
 
 for result in translator.results:
-    if result[0] != "error":
-        print(f"{result[0]} is {result[1]}")
+    if result[0] != 'error':
+        print(f'{result[0]} is {result[1]}')
     else:
         print(result[1])
