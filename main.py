@@ -1,23 +1,15 @@
-import re
+from translator import Translator
 
-from parser_roman import parse
-
-symbolRegex = "^([\w]+) is ([A-Z]{1,2})$"
-with open('test.txt') as f:
+with open('input.txt') as f:
     lines = f.readlines()
 
-symbols = {}
-
+translator = Translator()
 for line in lines:
     query = line.strip()
-    if re.search(symbolRegex, query):
-        x = re.findall(symbolRegex, query)
-        symbols[x[0][0]] = x[0][1]
-print(symbols)
+    translator.parseCommand(query)
 
-test = "tegj glob prok"
-romanString = ""
-
-for symbol in test.split(" "):
-    romanString += symbols.get(symbol)
-print(parse(romanString))
+for result in translator.results:
+    if result[0] != "error":
+        print(f"{result[0]} is {result[1]}")
+    else:
+        print(result[1])
